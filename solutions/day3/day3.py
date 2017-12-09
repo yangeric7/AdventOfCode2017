@@ -17,7 +17,7 @@ def part1(num):
 	for i in range(0,4):
 		direction = (square - int(square_index/2)) - (square_index*i)
 		cardinal.append(direction)
-	print(cardinal,square_index)
+
 	return min(abs(direction - num) for direction in cardinal) + int((index - 1)/2)
 
 def testCase1(num,ans):
