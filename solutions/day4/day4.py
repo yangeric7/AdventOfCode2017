@@ -17,7 +17,7 @@ def part2(arr):
 		for word in passphrase:
 			anagram = sorted(list(word))
 			if anagram in unique:
-				pass
+				break
 			else:
 				unique.append(anagram)
 		if len(unique) == len(passphrase):
