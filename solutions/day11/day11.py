@@ -1,24 +1,7 @@
 
 # here we essentially calculate the "fewest steps from the start" as the child walks the path
 # for each direction taken, we calc the number of steps to the current spot
-def furthestStep(steps):
-	stepsTaken = []
-	maxSteps = 0
-
-	for step in steps:
-		stepsTaken.append(step)
-		numSteps = fewSteps(stepsTaken)
-		if numSteps > maxSteps:
-			maxSteps = numSteps
-
-	return maxSteps
-
-def fewSteps(steps):
-	directions = {'n':0, 'ne':0, 'se':0, 's':0, 'sw':0,'nw':0}
-
-	for step in steps:
-		directions[step] += 1
-
+def fewSteps(directions):
 	prev_dir = {}
 	while directions != prev_dir:
 		directions = trim(directions)
@@ -68,9 +51,19 @@ def consolidate(directions, final, path1, path2):
 # a certain point in the path
 def main():
 	steps = open('input.txt','r').read().strip().split(',')
+
+	directions = {'n':0, 'ne':0, 'se':0, 's':0, 'sw':0,'nw':0}
+	maxSteps = 0
+	count = 0
+	for step in steps:
+		directions[step] += 1
+		count += 1
+		curSteps = fewSteps(dict(directions))
+		if curSteps > maxSteps:
+			maxSteps = curSteps
 	
-	print('Problem 1: ' + str(fewSteps(steps)))
-	print('Problem 2: ' + str(furthestStep(steps)))
+	print('Problem 1: ' + str(fewSteps(directions)))
+	print('Problem 2: ' + str(maxSteps))
 
 
 if __name__ == '__main__':
