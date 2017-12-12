@@ -27,7 +27,7 @@ def knothash(length,currentPos, skipSize, curList):
 
 def reverse(input_list, start, length):
 	reverse_list = []
-	#print(input_list)
+
 	if (start + length) >= len(input_list):
 		reverse1 = input_list[start:len(input_list)][::-1]
 		reverse2 = input_list[0:(start + length - len(input_list))][::-1]
@@ -39,15 +39,46 @@ def reverse(input_list, start, length):
 
 
 def main():
-	input_file = [int(num) for num in open('input.txt','r').read().strip().split(',')]
+	string = '1,2,3'.replace(' ','')
+	with open('input.txt','r') as input_text:
+		pass
+		#input_nums= [int(num) for num in input_text.read().strip().split(',')]
+		#input_len = [ord(char) for char in input_text.read()]
+
+	input_len = [ord(string[char]) for char in range(0,len(string))]
+	lengths = input_len + [17,31,73,47,23]
+
 	input_list = []
 	for i in range(0,256):
 		input_list.append(i)
 	
-	print('Problem 1: ' + str(decrypt(input_file, input_list)))
-	#print(decrypt([3,4,1,5],[0,1,2,3,4]))
+	#print('Problem 1: ' + str(decrypt(input_nums, list(input_list))))
+
+	second_list = list(input_list)
+	skipSize = 0
+	currentPos = 0
+
+	for i in range(0,64):
+		for length in lengths:
+			currentPos = knothash(length, currentPos, skipSize, second_list)
+			skipSize += 1
+
+	dense_hash = []
+	for i in range(0,16):
+		sparse_hash = second_list[16*i:16*i+16]
+		output = reduce(lambda x,y: x^y, sparse_hash)
+		dense_hash.append(output)
+
+	hexdecimal = ''
+	for num in dense_hash:
+		hexhash = hex(num).replace('0x','')
+		print(hexhash)
+		if len(hexhash) == 1:
+			hexhash = '0' + hexhash
+		hexdecimal += hexhash
+
+	print(hexdecimal)
 
 if __name__ == '__main__':
 	main()
 
-#16256 too low
