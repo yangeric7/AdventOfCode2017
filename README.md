@@ -6,4 +6,3 @@
 ## Unsolved Problems
 1. Day 3.2
 2. Day 7.2
-3. Day 10
