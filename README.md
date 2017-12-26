@@ -6,3 +6,6 @@
 ## Unsolved Problems
 1. Day 3.2
 2. Day 7.2
+3. Day 18-25
+4. Day 16.2
+5. Day 17.2
